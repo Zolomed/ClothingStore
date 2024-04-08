@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".RegActivity">
 
     <TextView
@@ -29,6 +30,7 @@
         android:layout_marginTop="120sp"
         android:layout_marginHorizontal="20sp"
         android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         android:hint="Введите номер телефона" />
 
     <EditText
@@ -42,6 +44,7 @@
         android:layout_marginTop="40sp"
         android:layout_marginHorizontal="20sp"
         android:textColor="@color/black"
+        android:textColorHint="@color/gray"
         android:hint="Введите пароль" />
 
     <Button

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ItemsActivity">
+    tools:context=".BasketActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -24,8 +24,7 @@
             android:layout_height="40sp"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/items"
-            app:tint="@color/gray" />
+            app:srcCompat="@drawable/items" />
 
         <ImageButton
             android:id="@+id/basket_button"
@@ -33,7 +32,8 @@
             android:layout_height="40sp"
             android:layout_weight="1"
             android:backgroundTint="@color/white"
-            app:srcCompat="@drawable/basket" />
+            app:srcCompat="@drawable/basket"
+            app:tint="@color/gray" />
 
         <ImageButton
             android:id="@+id/favourites_button"
