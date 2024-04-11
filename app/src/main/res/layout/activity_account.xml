@@ -11,8 +11,8 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginTop="@dimen/indent_top"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/account"
         android:textSize="30sp"
@@ -23,8 +23,8 @@
         android:id="@+id/logout_button"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginTop="@dimen/indent_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logout" />
@@ -43,6 +43,7 @@
             android:id="@+id/imageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
+            android:scaleType="centerCrop"
             app:tint="@color/no_color"
             tools:srcCompat="@drawable/ava" />
 
