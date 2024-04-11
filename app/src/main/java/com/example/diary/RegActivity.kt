@@ -2,6 +2,7 @@ package com.example.diary
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +20,13 @@ class RegActivity : AppCompatActivity() {
             insets
         }
 
+        val regButton: Button = findViewById(R.id.reg_button)
         val linkToLog: TextView = findViewById(R.id.link_to_log)
+
+        regButton.setOnClickListener {
+            val intent = Intent(this, ItemsActivity::class.java)
+            startActivity(intent)
+        }
 
         linkToLog.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
