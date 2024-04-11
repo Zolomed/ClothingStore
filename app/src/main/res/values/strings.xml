@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Diary</string>
+    <string name="user_phone">Введите номер телефона</string>
+    <string name="user_pass">Введите пароль</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="voity">Войти в аккаунт</string>
+    <string name="voidite">Войдите в аккаунт</string>
+    <string name="go_reg">Зарегистрируйтесь</string>
+    <string name="catalog">Каталог таваров</string>
+    <string name="basket">Корзина</string>
+    <string name="favourites">Избранное</string>
+    <string name="name_primer">Иван Иванович</string>
+    <string name="email_primer">primer@mail.ru</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="account">Аккаунт</string>
+    <string name="product_name_primer">Платье</string>
+    <string name="price_primer">Цена: 100р.</string>
 </resources>
