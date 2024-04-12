@@ -12,61 +12,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textColor="@color/black"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="20sp"
-        android:textSize="30sp"
-        android:text="Войдите в аккаунт" />
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginTop="@dimen/indent_top"
+        android:text="@string/voidite"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/user_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp"
-        android:layout_marginTop="120sp"
-        android:layout_marginHorizontal="20sp"
-        android:textColor="@color/black"
+        android:layout_marginTop="120dp"
+        android:layout_marginHorizontal="@dimen/indent"
         android:textColorHint="@color/gray"
-        android:hint="Введите номер телефона" />
+        android:hint="@string/user_phone" />
 
     <EditText
         android:id="@+id/user_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:layout_marginTop="40sp"
-        android:layout_marginHorizontal="20sp"
-        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="@dimen/indent"
         android:textColorHint="@color/gray"
-        android:hint="Введите пароль" />
+        android:hint="@string/user_pass" />
 
     <Button
-        android:id="@+id/button_auth"
-        android:layout_width="300sp"
+        android:id="@+id/auth_button"
+        style="@style/Button"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/black"
-        android:layout_marginTop="200sp"
-        android:fontFamily="sans-serif-condensed-medium"
+        android:layout_marginTop="200dp"
         android:layout_gravity="center"
-        android:text="Войти" />
+        android:text="@string/voity" />
 
     <TextView
         android:id="@+id/link_to_reg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/indent_top"
         android:textSize="15sp"
-        android:text="Зарегистрироваться" />
+        android:text="@string/register" />
 
 </LinearLayout>
