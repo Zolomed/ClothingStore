@@ -12,7 +12,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:layout_marginTop="@dimen/indent_top"
         android:layout_marginHorizontal="@dimen/indent"
         android:textSize="30sp"
@@ -22,7 +21,6 @@
         android:id="@+id/user_phone_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:ems="10"
         android:inputType="phone"
         android:minHeight="48dp"
@@ -35,7 +33,6 @@
         android:id="@+id/user_pass_reg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:ems="10"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -50,7 +47,6 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:fontFamily="sans-serif-condensed-medium"
         android:layout_gravity="center"
         android:text="@string/register" />
 
@@ -60,7 +56,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/indent_top"
-        android:fontFamily="sans-serif-condensed-medium"
         android:textSize="15sp"
         android:text="@string/voity" />
 

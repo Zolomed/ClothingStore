@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
         android:layout_marginTop="@dimen/indent_top"
-        android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/account"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/name_primer"
                 android:textSize="18sp" />
 
@@ -66,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="18dp"
                 android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/email_primer"
                 android:textSize="18sp" />
 

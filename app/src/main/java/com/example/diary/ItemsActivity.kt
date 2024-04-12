@@ -19,9 +19,15 @@ class ItemsActivity : AppCompatActivity() {
             insets
         }
 
+        val toSearchButton: ImageButton =findViewById(R.id.to_search_button)
         val basketButton: ImageButton = findViewById(R.id.basket_button)
         val favouritesButton: ImageButton = findViewById(R.id.favourites_button)
         val accountButton: ImageButton = findViewById(R.id.account_button)
+
+        toSearchButton.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
 
         basketButton.setOnClickListener{
             val intent = Intent(this, BasketActivity::class.java)

@@ -15,4 +15,7 @@
     <string name="account">Аккаунт</string>
     <string name="product_name_primer">Платье</string>
     <string name="price_primer">Цена: 100р.</string>
+    <string name="search_hint">Введите товар или бренд</string>
+    <string name="clear">Отчистить</string>
+    <string name="go_back">Вернуться назад</string>
 </resources>

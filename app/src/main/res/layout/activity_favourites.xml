@@ -10,7 +10,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed-medium"
         android:layout_marginTop="@dimen/indent_top"
         android:layout_marginHorizontal="@dimen/indent"
         android:textSize="30sp"
@@ -19,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/button_search"
+        android:id="@+id/to_search_button"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/indent_top"
@@ -36,7 +35,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_search" />
+        app:layout_constraintTop_toBottomOf="@+id/to_search_button" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
