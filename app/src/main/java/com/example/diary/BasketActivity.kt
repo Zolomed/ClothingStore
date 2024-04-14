@@ -9,6 +9,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class BasketActivity : AppCompatActivity() {
+
+    private lateinit var itemsButton: ImageButton
+    private lateinit var favouritesButton: ImageButton
+    private lateinit var accountButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,9 +24,9 @@ class BasketActivity : AppCompatActivity() {
             insets
         }
 
-        val itemsButton: ImageButton = findViewById(R.id.items_button)
-        val favouritesButton: ImageButton = findViewById(R.id.favourites_button)
-        val accountButton: ImageButton = findViewById(R.id.account_button)
+        itemsButton = findViewById(R.id.items_button)
+        favouritesButton = findViewById(R.id.favourites_button)
+        accountButton = findViewById(R.id.account_button)
 
         itemsButton.setOnClickListener{
             val intent = Intent(this, ItemsActivity::class.java)

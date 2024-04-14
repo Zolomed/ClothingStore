@@ -9,6 +9,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class ItemsActivity : AppCompatActivity() {
+
+    private lateinit var toSearchButton: ImageButton
+    private lateinit var basketButton: ImageButton
+    private lateinit var favouritesButton: ImageButton
+    private lateinit var accountButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,10 +25,10 @@ class ItemsActivity : AppCompatActivity() {
             insets
         }
 
-        val toSearchButton: ImageButton =findViewById(R.id.to_search_button)
-        val basketButton: ImageButton = findViewById(R.id.basket_button)
-        val favouritesButton: ImageButton = findViewById(R.id.favourites_button)
-        val accountButton: ImageButton = findViewById(R.id.account_button)
+        toSearchButton = findViewById(R.id.to_search_button)
+        basketButton = findViewById(R.id.basket_button)
+        favouritesButton = findViewById(R.id.favourites_button)
+        accountButton = findViewById(R.id.account_button)
 
         toSearchButton.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)

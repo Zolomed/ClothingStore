@@ -10,6 +10,10 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class RegActivity : AppCompatActivity() {
+
+    private lateinit var regButton: Button
+    private lateinit var linkToLog: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,8 +24,8 @@ class RegActivity : AppCompatActivity() {
             insets
         }
 
-        val regButton: Button = findViewById(R.id.reg_button)
-        val linkToLog: TextView = findViewById(R.id.link_to_log)
+        regButton = findViewById(R.id.reg_button)
+        linkToLog = findViewById(R.id.link_to_log)
 
         regButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

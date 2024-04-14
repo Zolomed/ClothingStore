@@ -9,6 +9,12 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class AccountActivity : AppCompatActivity() {
+
+    private lateinit var logoutButton: ImageButton
+    private lateinit var itemsButton: ImageButton
+    private lateinit var basketButton: ImageButton
+    private lateinit var favouritesButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -19,10 +25,10 @@ class AccountActivity : AppCompatActivity() {
             insets
         }
 
-        val logoutButton: ImageButton = findViewById(R.id.logout_button)
-        val itemsButton: ImageButton = findViewById(R.id.items_button)
-        val basketButton: ImageButton = findViewById(R.id.basket_button)
-        val favouritesButton: ImageButton = findViewById(R.id.favourites_button)
+        logoutButton = findViewById(R.id.logout_button)
+        itemsButton = findViewById(R.id.items_button)
+        basketButton = findViewById(R.id.basket_button)
+        favouritesButton = findViewById(R.id.favourites_button)
 
         logoutButton.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)

@@ -10,10 +10,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var authButton: Button
+    private lateinit var linkToReg: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
@@ -23,8 +24,8 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val authButton: Button = findViewById(R.id.auth_button)
-        val linkToReg: TextView = findViewById(R.id.link_to_reg)
+        authButton = findViewById(R.id.auth_button)
+        linkToReg = findViewById(R.id.link_to_reg)
 
         authButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

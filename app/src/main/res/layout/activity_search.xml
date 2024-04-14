@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
-        android:layout_marginTop="@dimen/indent_top"
+        android:layout_marginTop="80dp"
         android:ems="10"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
