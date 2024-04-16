@@ -33,21 +33,33 @@ class AccountActivity : AppCompatActivity() {
         logoutButton.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         itemsButton.setOnClickListener{
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         basketButton.setOnClickListener{
             val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         favouritesButton.setOnClickListener{
             val intent = Intent(this, FavouritesActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, ItemsActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

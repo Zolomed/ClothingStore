@@ -31,16 +31,27 @@ class FavouritesActivity : AppCompatActivity() {
         itemsButton.setOnClickListener{
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         basketButton.setOnClickListener{
             val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         accountButton.setOnClickListener{
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, ItemsActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }
