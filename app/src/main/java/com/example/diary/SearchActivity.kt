@@ -1,6 +1,7 @@
 package com.example.diary
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -10,8 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import com.example.diary.retrofit.Api
+import com.example.diary.retrofit.Weather
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.internal.ViewUtils.showKeyboard
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 class SearchActivity : AppCompatActivity() {
 
@@ -22,6 +29,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var search: EditText
     private lateinit var clearButton: Button
     private lateinit var backButton: Button
+    private lateinit var weatherButton: Button
+    private val baseUrl: String = "http://api.weatherapi.com/v1/"
+
+    private val retrofit = Retrofit.Builder().baseUrl(baseUrl).build()
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -42,6 +53,9 @@ class SearchActivity : AppCompatActivity() {
         search = findViewById(R.id.search)
         clearButton = findViewById(R.id.clear_button)
         backButton = findViewById(R.id.back_button)
+        weatherButton = findViewById(R.id.weather_button)
+
+        val api = retrofit.create(Api::class.java)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -64,6 +78,32 @@ class SearchActivity : AppCompatActivity() {
         search.setOnClickListener {
             search.requestFocus()
             showKeyboard()
+        }
+
+        weatherButton.setOnClickListener{
+            val city = search.text.toString()
+            val weather = api.getWeather(city_name = city).enqueue(object : Callback<Weather>{
+                override fun onResponse(call: Call<Weather>, response:
+                Response<Weather>
+                ) {
+                    // Получили ответ от сервера
+                    if (response.isSuccessful) {
+                        // Наш запрос был удачным, получаем наши объекты
+                        val city = response.body().orEmpty()
+                    } else {
+                        // Сервер отклонил наш запрос с ошибкой
+                        val errorJson = response.errorBody()?.string()
+                    }
+                }
+
+                override fun onFailure(call: Call<Weather>, t: Throwable) {
+                    // Не смогли присоединиться к серверу
+                    // Выводим ошибку в лог, что-то пошло не так
+                    t.printStackTrace()
+                }
+            })
+            val editableValue = Editable.Factory.getInstance().newEditable(weather.current.temp_c.toString())
+            search.text = editableValue
         }
     }
 
