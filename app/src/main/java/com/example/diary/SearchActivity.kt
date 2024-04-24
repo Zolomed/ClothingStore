@@ -1,7 +1,7 @@
 package com.example.diary
 
 import android.os.Bundle
-import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -11,34 +11,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
-import com.example.diary.retrofit.Api
+import com.example.diary.retrofit.ApiService
 import com.example.diary.retrofit.Weather
-import com.google.android.material.internal.ViewUtils.hideKeyboard
-import com.google.android.material.internal.ViewUtils.showKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SearchActivity : AppCompatActivity() {
-
-    companion object {
-        private const val SEARCH_TEXT_KEY = "search_text_key"
-    }
 
     private lateinit var search: EditText
     private lateinit var clearButton: Button
     private lateinit var backButton: Button
     private lateinit var weatherButton: Button
-    private val baseUrl: String = "http://api.weatherapi.com/v1/"
 
-    private val retrofit = Retrofit.Builder().baseUrl(baseUrl).build()
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val searchText = search.text.toString()
-        outState.putString(SEARCH_TEXT_KEY, searchText)
-    }
+    private val retrofit = Retrofit.Builder().baseUrl("https://api.weatherapi.com/v1/").addConverterFactory(GsonConverterFactory.create()).build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_button)
         weatherButton = findViewById(R.id.weather_button)
 
-        val api = retrofit.create(Api::class.java)
+        val apiService = retrofit.create(ApiService::class.java)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -82,29 +70,34 @@ class SearchActivity : AppCompatActivity() {
 
         weatherButton.setOnClickListener{
             val city = search.text.toString()
-            val weather = api.getWeather(city_name = city).enqueue(object : Callback<Weather>{
-                override fun onResponse(call: Call<Weather>, response:
-                Response<Weather>
-                ) {
-                    // Получили ответ от сервера
+            val apiKey = "8c34f5691fcb4e6e9e1180730241704"
+            val aqi = "no"
+            apiService.getWeather(apiKey, city, aqi).enqueue(object : Callback<Weather> {
+                override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
                     if (response.isSuccessful) {
-                        // Наш запрос был удачным, получаем наши объекты
-                        val city = response.body().orEmpty()
+                        val weatherResponse = response.body()
+                        val temperatureC = weatherResponse?.current?.temp_c.toString()
+                        search.setText(temperatureC)
                     } else {
-                        // Сервер отклонил наш запрос с ошибкой
-                        val errorJson = response.errorBody()?.string()
+                        Log.e("ApiError", "Request failed: " + response.code())
                     }
                 }
 
                 override fun onFailure(call: Call<Weather>, t: Throwable) {
-                    // Не смогли присоединиться к серверу
-                    // Выводим ошибку в лог, что-то пошло не так
-                    t.printStackTrace()
+                    Log.e("ApiError", "Request failed: ${t.message}")
                 }
             })
-            val editableValue = Editable.Factory.getInstance().newEditable(weather.current.temp_c.toString())
-            search.text = editableValue
         }
+    }
+
+    companion object {
+        private const val SEARCH_TEXT_KEY = "search_text_key"
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val searchText = search.text.toString()
+        outState.putString(SEARCH_TEXT_KEY, searchText)
     }
 
     private fun hideKeyboard() {
