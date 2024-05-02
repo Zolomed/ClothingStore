@@ -8,9 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.R
-import com.example.diary.retrofit.Condition
-import com.example.diary.retrofit.Current
-import com.example.diary.retrofit.Location
 import com.example.diary.retrofit.Weather
 
 class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
@@ -33,33 +30,14 @@ class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<Wea
         return data!!.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val item = data?.get(position)
 
         holder.weatherName.text = item?.location?.name
-        holder.weatherLocaltime.text = item?.location?.localtime
-        holder.weatherOb.text = item?.current?.condition?.text
-        holder.weatherTemp.text = item?.current?.temp_c.toString()
-        holder.weatherVis.text = item?.current?.vis_km.toString()
-
+        holder.weatherLocaltime.text = "Время: ${item?.location?.localtime}"
+        holder.weatherOb.text = "Описание: ${item?.current?.condition?.text}"
+        holder.weatherTemp.text = "Темперетара: ${item?.current?.temp_c.toString()}С°"
+        holder.weatherVis.text = "Скорость ветра: ${item?.current?.vis_km.toString()}km/h"
     }
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun setListLocation(list: List<Location>){
-//        listWeatherLocation = list
-//        notifyDataSetChanged()
-//    }
-//
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun setListCurrent(list: List<Current>){
-//        listWeatherCurrent = list
-//        notifyDataSetChanged()
-//    }
-//
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun setListCondition(list: List<Condition>){
-//        listWeatherCondition = list
-//        notifyDataSetChanged()
-//    }
-
 }

@@ -1,7 +1,6 @@
 package com.example.diary
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -15,14 +14,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.adapter.WeatherAdapter
-import com.example.diary.retrofit.ApiService
-import com.example.diary.retrofit.Weather
 import com.example.diary.retrofit.WeatherApiRepo
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class SearchActivity : AppCompatActivity() {
