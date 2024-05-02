@@ -6,27 +6,33 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.diary.adapter.WeatherAdapter
 import com.example.diary.retrofit.ApiService
 import com.example.diary.retrofit.Weather
+import com.example.diary.retrofit.WeatherApiRepo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var search: EditText
-    private lateinit var clearButton: Button
-    private lateinit var backButton: Button
+    private lateinit var clearButton: ImageButton
+    private lateinit var backButton: ImageButton
+    private lateinit var rvWeather: RecyclerView
     private lateinit var weatherButton: Button
 
-    private val retrofit = Retrofit.Builder().baseUrl("https://api.weatherapi.com/v1/").addConverterFactory(GsonConverterFactory.create()).build()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +47,8 @@ class SearchActivity : AppCompatActivity() {
         search = findViewById(R.id.search)
         clearButton = findViewById(R.id.clear_button)
         backButton = findViewById(R.id.back_button)
+        rvWeather = findViewById(R.id.rv_weather)
         weatherButton = findViewById(R.id.weather_button)
-
-        val apiService = retrofit.create(ApiService::class.java)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -69,24 +74,7 @@ class SearchActivity : AppCompatActivity() {
         }
 
         weatherButton.setOnClickListener{
-            val city = search.text.toString()
-            val apiKey = "8c34f5691fcb4e6e9e1180730241704"
-            val aqi = "no"
-            apiService.getWeather(apiKey, city, aqi).enqueue(object : Callback<Weather> {
-                override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
-                    if (response.isSuccessful) {
-                        val weatherResponse = response.body()
-                        val temperatureC = weatherResponse?.current?.temp_c.toString()
-                        search.setText(temperatureC)
-                    } else {
-                        Log.e("ApiError", "Request failed: " + response.code())
-                    }
-                }
-
-                override fun onFailure(call: Call<Weather>, t: Throwable) {
-                    Log.e("ApiError", "Request failed: ${t.message}")
-                }
-            })
+            getAPIData()
         }
     }
 
@@ -108,5 +96,18 @@ class SearchActivity : AppCompatActivity() {
     private fun showKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(search, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    private fun getAPIData(){
+        val text = search.text.toString()
+        val weatherApiRepo = WeatherApiRepo()
+
+        weatherApiRepo.getDataFromApi(text){weather ->
+            val layoutManager = LinearLayoutManager(this)
+            val adapter = WeatherAdapter(listOf(weather))
+            rvWeather.adapter = adapter
+            rvWeather.setLayoutManager(layoutManager)
+            search.text.clear()
+        }
     }
 }
