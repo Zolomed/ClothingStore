@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.diary.R
 import com.example.diary.retrofit.Weather
 
@@ -34,9 +33,6 @@ class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<Wea
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val item = data?.get(position)
-        Glide.with(holder.itemView)
-            .load(item?.current?.condition?.icon)
-            .into(holder.weatherImage)
         holder.weatherName.text = item?.location?.name
         holder.weatherLocaltime.text = "Время: ${item?.location?.localtime}"
         holder.weatherOb.text = "Описание: ${item?.current?.condition?.text}"

@@ -6,6 +6,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,6 +25,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var backButton: ImageButton
     private lateinit var rvWeather: RecyclerView
     private lateinit var weatherButton: Button
+    private lateinit var errorText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
         backButton = findViewById(R.id.back_button)
         rvWeather = findViewById(R.id.rv_weather)
         weatherButton = findViewById(R.id.weather_button)
+        errorText = findViewById(R.id.error_text)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -67,6 +70,10 @@ class SearchActivity : AppCompatActivity() {
         weatherButton.setOnClickListener{
             getAPIData()
         }
+
+        errorText.setOnClickListener{
+            getAPIData()
+        }
     }
 
     companion object {
@@ -89,11 +96,11 @@ class SearchActivity : AppCompatActivity() {
         imm.showSoftInput(search, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    private fun getAPIData(){
+    fun getAPIData(){
         val text = search.text.toString()
         val weatherApiRepo = WeatherApiRepo()
 
-        weatherApiRepo.getDataFromApi(text, rvWeather, search){weather ->
+        weatherApiRepo.getDataFromApi(text, rvWeather, search, errorText){weather ->
             val layoutManager = LinearLayoutManager(this)
             val adapter = WeatherAdapter(listOf(weather))
             rvWeather.adapter = adapter

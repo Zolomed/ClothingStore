@@ -33,7 +33,6 @@ class ItemsActivity : AppCompatActivity() {
         toSearchButton.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
-            finishAffinity()
         }
 
         basketButton.setOnClickListener{
