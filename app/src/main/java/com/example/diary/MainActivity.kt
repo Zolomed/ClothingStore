@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         authButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         linkToReg.setOnClickListener {
