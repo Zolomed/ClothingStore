@@ -25,7 +25,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var rvWeather: RecyclerView
     private lateinit var weatherButton: Button
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -94,12 +93,11 @@ class SearchActivity : AppCompatActivity() {
         val text = search.text.toString()
         val weatherApiRepo = WeatherApiRepo()
 
-        weatherApiRepo.getDataFromApi(text){weather ->
+        weatherApiRepo.getDataFromApi(text, rvWeather, search){weather ->
             val layoutManager = LinearLayoutManager(this)
             val adapter = WeatherAdapter(listOf(weather))
             rvWeather.adapter = adapter
             rvWeather.setLayoutManager(layoutManager)
-            search.text.clear()
         }
     }
 }
