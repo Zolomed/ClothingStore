@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         linkToReg.setOnClickListener {
             val intent = Intent(this, RegActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
     }
 }
