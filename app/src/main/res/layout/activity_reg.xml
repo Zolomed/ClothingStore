@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent_top"
+        android:layout_marginTop="@dimen/indent"
         android:layout_marginHorizontal="@dimen/indent"
         android:textSize="30sp"
         android:text="@string/go_reg" />
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/indent_top"
+        android:layout_marginTop="@dimen/indent"
         android:textSize="15sp"
         android:text="@string/voity" />
 

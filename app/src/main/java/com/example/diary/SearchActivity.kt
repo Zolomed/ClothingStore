@@ -5,29 +5,27 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
-import com.google.android.material.internal.ViewUtils.hideKeyboard
-import com.google.android.material.internal.ViewUtils.showKeyboard
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.diary.adapter.WeatherAdapter
+import com.example.diary.retrofit.WeatherApiRepo
+
 
 class SearchActivity : AppCompatActivity() {
 
-    companion object {
-        private const val SEARCH_TEXT_KEY = "search_text_key"
-    }
-
     private lateinit var search: EditText
-    private lateinit var clearButton: Button
-    private lateinit var backButton: Button
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        val searchText = search.text.toString()
-        outState.putString(SEARCH_TEXT_KEY, searchText)
-    }
+    private lateinit var clearButton: ImageButton
+    private lateinit var backButton: ImageButton
+    private lateinit var rvWeather: RecyclerView
+    private lateinit var weatherButton: Button
+    private lateinit var errorText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +40,9 @@ class SearchActivity : AppCompatActivity() {
         search = findViewById(R.id.search)
         clearButton = findViewById(R.id.clear_button)
         backButton = findViewById(R.id.back_button)
+        rvWeather = findViewById(R.id.rv_weather)
+        weatherButton = findViewById(R.id.weather_button)
+        errorText = findViewById(R.id.error_text)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -65,6 +66,24 @@ class SearchActivity : AppCompatActivity() {
             search.requestFocus()
             showKeyboard()
         }
+
+        weatherButton.setOnClickListener{
+            getAPIData()
+        }
+
+        errorText.setOnClickListener{
+            getAPIData()
+        }
+    }
+
+    companion object {
+        private const val SEARCH_TEXT_KEY = "search_text_key"
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val searchText = search.text.toString()
+        outState.putString(SEARCH_TEXT_KEY, searchText)
     }
 
     private fun hideKeyboard() {
@@ -75,5 +94,17 @@ class SearchActivity : AppCompatActivity() {
     private fun showKeyboard() {
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(search, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    fun getAPIData(){
+        val text = search.text.toString()
+        val weatherApiRepo = WeatherApiRepo()
+
+        weatherApiRepo.getDataFromApi(text, rvWeather, search, errorText){weather ->
+            val layoutManager = LinearLayoutManager(this)
+            val adapter = WeatherAdapter(listOf(weather))
+            rvWeather.adapter = adapter
+            rvWeather.setLayoutManager(layoutManager)
+        }
     }
 }
