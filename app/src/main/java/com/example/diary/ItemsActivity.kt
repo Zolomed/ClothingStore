@@ -35,19 +35,19 @@ class ItemsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        basketButton.setOnClickListener{
+        basketButton.setOnClickListener {
             val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        favouritesButton.setOnClickListener{
+        favouritesButton.setOnClickListener {
             val intent = Intent(this, FavouritesActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        accountButton.setOnClickListener{
+        accountButton.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
             finishAffinity()

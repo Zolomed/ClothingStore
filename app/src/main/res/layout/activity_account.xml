@@ -75,6 +75,13 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="@string/edit_profile" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/theme_switcher"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Переключение темы"
+                android:layout_gravity="center" />
         </LinearLayout>
     </LinearLayout>
 

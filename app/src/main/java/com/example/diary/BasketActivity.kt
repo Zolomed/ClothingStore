@@ -28,19 +28,19 @@ class BasketActivity : AppCompatActivity() {
         favouritesButton = findViewById(R.id.favourites_button)
         accountButton = findViewById(R.id.account_button)
 
-        itemsButton.setOnClickListener{
+        itemsButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        favouritesButton.setOnClickListener{
+        favouritesButton.setOnClickListener {
             val intent = Intent(this, FavouritesActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        accountButton.setOnClickListener{
+        accountButton.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
             finishAffinity()

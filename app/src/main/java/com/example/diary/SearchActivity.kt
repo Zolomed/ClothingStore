@@ -67,11 +67,11 @@ class SearchActivity : AppCompatActivity() {
             showKeyboard()
         }
 
-        weatherButton.setOnClickListener{
+        weatherButton.setOnClickListener {
             getAPIData()
         }
 
-        errorText.setOnClickListener{
+        errorText.setOnClickListener {
             getAPIData()
         }
     }
@@ -96,7 +96,7 @@ class SearchActivity : AppCompatActivity() {
         imm.showSoftInput(search, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    fun getAPIData(){
+    private fun getAPIData() {
         val text = search.text.toString()
         val weatherApiRepo = WeatherApiRepo()
 
