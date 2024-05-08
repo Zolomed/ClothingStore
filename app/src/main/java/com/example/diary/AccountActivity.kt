@@ -40,6 +40,7 @@ class AccountActivity : AppCompatActivity() {
         }
 
         themeSwitcher.isChecked = (applicationContext as App).darkTheme
+        (applicationContext as App).switchTheme(themeSwitcher.isChecked)
 
         themeSwitcher.setOnCheckedChangeListener {switcher,  checked->
             (applicationContext as App).switchTheme(checked)
