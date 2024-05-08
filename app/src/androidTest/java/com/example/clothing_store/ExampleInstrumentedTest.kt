@@ -1,4 +1,4 @@
-package com.example.diary
+package com.example.clothing_store
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diary</string>
+    <string name="app_name">Сlothing store</string>
     <string name="user_phone">Введите номер телефона</string>
     <string name="user_pass">Введите пароль</string>
     <string name="register">Зарегистрироваться</string>

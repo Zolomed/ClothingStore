@@ -1,4 +1,4 @@
-package com.example.diary.adapter
+package com.example.clothing_store.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diary.R
-import com.example.diary.retrofit.Weather
+import com.example.clothing_store.R
+import com.example.clothing_store.retrofit.Weather
 
 class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 

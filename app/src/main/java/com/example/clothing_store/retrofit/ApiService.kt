@@ -1,4 +1,4 @@
-package com.example.diary.retrofit
+package com.example.clothing_store.retrofit
 
 import retrofit2.Call
 import retrofit2.http.GET

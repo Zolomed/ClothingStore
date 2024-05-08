@@ -1,4 +1,4 @@
-package com.example.diary
+package com.example.clothing_store
 
 import android.content.Intent
 import android.os.Bundle

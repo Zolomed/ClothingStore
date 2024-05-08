@@ -1,4 +1,4 @@
-package com.example.diary
+package com.example.clothing_store
 
 import android.os.Bundle
 import android.view.View
@@ -15,8 +15,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.diary.adapter.WeatherAdapter
-import com.example.diary.retrofit.WeatherApiRepo
+import com.example.clothing_store.adapter.WeatherAdapter
+import com.example.clothing_store.retrofit.WeatherApiRepo
 
 
 class SearchActivity : AppCompatActivity() {
