@@ -78,10 +78,11 @@
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/theme_switcher"
+                style="@style/Base.Theme.Diary"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="Переключение темы"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:text="Переключение темы" />
         </LinearLayout>
     </LinearLayout>
 
