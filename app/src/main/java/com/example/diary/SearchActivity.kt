@@ -6,6 +6,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var search: EditText
     private lateinit var clearButton: ImageButton
     private lateinit var backButton: ImageButton
+    private lateinit var progressBar: ProgressBar
     private lateinit var rvWeather: RecyclerView
     private lateinit var weatherButton: Button
     private lateinit var errorText: TextView
@@ -40,6 +42,7 @@ class SearchActivity : AppCompatActivity() {
         search = findViewById(R.id.search)
         clearButton = findViewById(R.id.clear_button)
         backButton = findViewById(R.id.back_button)
+        progressBar = findViewById(R.id.progress_bar)
         rvWeather = findViewById(R.id.rv_weather)
         weatherButton = findViewById(R.id.weather_button)
         errorText = findViewById(R.id.error_text)
@@ -100,7 +103,7 @@ class SearchActivity : AppCompatActivity() {
         val text = search.text.toString()
         val weatherApiRepo = WeatherApiRepo()
 
-        weatherApiRepo.getDataFromApi(text, rvWeather, search, errorText){weather ->
+        weatherApiRepo.getDataFromApi(text, rvWeather, search, errorText, progressBar){weather ->
             val layoutManager = LinearLayoutManager(this)
             val adapter = WeatherAdapter(listOf(weather))
             rvWeather.adapter = adapter

@@ -3,6 +3,7 @@ package com.example.diary.retrofit
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.diary.SearchActivity
@@ -19,13 +20,17 @@ class WeatherApiRepo {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    fun getDataFromApi(city:String, rvWeather: RecyclerView, search: EditText, errorText: TextView, callback: (Weather?) -> Unit){
+    fun getDataFromApi(city:String, rvWeather: RecyclerView, search: EditText, errorText: TextView,
+                       progressBar: ProgressBar, callback: (Weather?) -> Unit){
         val data: MutableMap<String, String> = HashMap()
         data["key"] = "8c34f5691fcb4e6e9e1180730241704"
         data["aqi"] = "no"
         data["q"] = city
+        rvWeather.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
         apiService.getWeather(data).enqueue(object : Callback<Weather> {
             override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
+                progressBar.visibility = View.GONE
                 if (response.isSuccessful) {
                     if (response.code() == 200){
                         val weatherResponse = response.body()
