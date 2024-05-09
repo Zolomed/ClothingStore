@@ -19,7 +19,7 @@ class WeatherApiRepo {
 
     private val apiService = retrofit.create(ApiService::class.java)
 
-    fun getDataFromApi(city:String, rvWeather: RecyclerView, search: EditText, errorText: TextView,
+    fun getDataFromApi(city:String, rvWeather: RecyclerView, errorText: TextView,
                        progressBar: ProgressBar, callback: (Weather?) -> Unit){
         val data: MutableMap<String, String> = HashMap()
         data["key"] = "8c34f5691fcb4e6e9e1180730241704"
@@ -36,11 +36,13 @@ class WeatherApiRepo {
                         callback(weatherResponse)
                         errorText.visibility = View.GONE
                         rvWeather.visibility = View.VISIBLE
-                        search.text.clear()
                     }
                 } else {
                     Log.e("ApiError", "Request failed: " + response.code())
-                    if (response.code() in 0..999) {
+                    if (response.code() == 400) {
+                        errorText.visibility = View.VISIBLE
+                        errorText.text = "Ничего не найдено, для повтора нажмите."
+                    } else if (response.code() in 0..999) {
                         errorText.visibility = View.VISIBLE
                         errorText.text = "Произошла ошибка, для повтора нажмите."
                     } else {

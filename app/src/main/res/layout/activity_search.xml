@@ -25,7 +25,6 @@
         android:layout_marginStart="@dimen/indent"
         android:layout_marginTop="80dp"
         android:ems="10"
-        android:text="Москва"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
         android:textColorHint="@color/gray"
