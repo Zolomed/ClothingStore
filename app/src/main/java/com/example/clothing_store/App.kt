@@ -12,7 +12,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        sharedPref = getSharedPreferences("settings", MODE_PRIVATE)
+        sharedPref = getSharedPreferences("Settings", MODE_PRIVATE)
         darkTheme = sharedPref.getBoolean("darkTheme", false)
     }
 

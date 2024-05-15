@@ -26,10 +26,6 @@ class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<Wea
         return WeatherViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return data!!.size
-    }
-
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
         val item = data?.get(position)
@@ -38,5 +34,9 @@ class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<Wea
         holder.weatherOb.text = "Описание: ${item?.current?.condition?.text}"
         holder.weatherTemp.text = "Темперетара: ${item?.current?.temp_c.toString()}С°"
         holder.weatherVis.text = "Скорость ветра: ${item?.current?.vis_km.toString()}km/h"
+    }
+
+    override fun getItemCount(): Int {
+        return data!!.size
     }
 }

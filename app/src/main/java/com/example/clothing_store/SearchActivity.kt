@@ -1,5 +1,6 @@
 package com.example.clothing_store
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clothing_store.adapter.SearchHistoryAdapter
 import com.example.clothing_store.adapter.WeatherAdapter
 import com.example.clothing_store.retrofit.WeatherApiRepo
 
@@ -36,8 +38,13 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var rvWeather: RecyclerView
     private lateinit var weatherButton: Button
     private lateinit var errorText: TextView
+    private lateinit var rvSearchHistory: RecyclerView
+    private lateinit var clearHistoryButton: Button
+
     private val searchRunnable = Runnable { getAPIData() }
     private val handler = Handler(Looper.getMainLooper())
+
+    private lateinit var sharedPreferencesSearch: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +63,11 @@ class SearchActivity : AppCompatActivity() {
         rvWeather = findViewById(R.id.weatherRecyclerView)
         weatherButton = findViewById(R.id.weatherButton)
         errorText = findViewById(R.id.errorText)
+        rvSearchHistory = findViewById(R.id.searchHistoryRecyclerView)
+        clearHistoryButton = findViewById(R.id.clearHistoryButton)
+        rvSearchHistory.layoutManager = LinearLayoutManager(this)
+
+        sharedPreferencesSearch = getSharedPreferences("SearchHistory", MODE_PRIVATE)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -71,8 +83,17 @@ class SearchActivity : AppCompatActivity() {
             hideKeyboard()
         }
 
+        clearHistoryButton.setOnClickListener {
+            clearSearchHistory()
+        }
+
         search.setOnClickListener {
             search.requestFocus()
+            val searchHistory = getSearchHistory().toList()
+            val adapter = SearchHistoryAdapter(searchHistory)
+            rvSearchHistory.adapter = adapter
+            rvSearchHistory.visibility = View.VISIBLE
+            clearHistoryButton.visibility = View.VISIBLE
             showKeyboard()
         }
 
@@ -92,6 +113,7 @@ class SearchActivity : AppCompatActivity() {
 
         weatherButton.setOnClickListener {
             getAPIData()
+            saveSearchQuery(search.text.toString())
         }
 
         errorText.setOnClickListener {
@@ -130,5 +152,25 @@ class SearchActivity : AppCompatActivity() {
     private fun searchDebounce() {
         handler.removeCallbacks(searchRunnable)
         handler.postDelayed(searchRunnable, SEARCH_DEBOUNCE_DELAY)
+    }
+
+    private fun saveSearchQuery(query: String) {
+        val history = getSearchHistory().toMutableSet()
+
+        if (history.size >= 10) {
+            history.remove(history.last())
+        }
+
+        history.add(query)
+
+        sharedPreferencesSearch.edit().putStringSet("history", history).apply()
+    }
+
+    private fun getSearchHistory(): Set<String> {
+        return sharedPreferencesSearch.getStringSet("history", setOf()) ?: setOf()
+    }
+
+    private fun clearSearchHistory() {
+        sharedPreferencesSearch.edit().remove("history").apply()
     }
 }
