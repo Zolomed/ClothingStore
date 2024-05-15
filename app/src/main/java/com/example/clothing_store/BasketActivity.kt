@@ -24,9 +24,9 @@ class BasketActivity : AppCompatActivity() {
             insets
         }
 
-        itemsButton = findViewById(R.id.items_button)
-        favouritesButton = findViewById(R.id.favourites_button)
-        accountButton = findViewById(R.id.account_button)
+        itemsButton = findViewById(R.id.itemsButton)
+        favouritesButton = findViewById(R.id.favouritesButton)
+        accountButton = findViewById(R.id.accountButton)
 
         itemsButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

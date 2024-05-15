@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/weather_name"
+        android:id="@+id/weatherName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -22,7 +22,7 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/weather_image"
+            android:id="@+id/weatherImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginTop="20dp"
@@ -36,27 +36,27 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/weather_ob"
+                android:id="@+id/weatherOb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sunny" />
 
             <TextView
-                android:id="@+id/weather_temp"
+                android:id="@+id/weatherTemp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="20 С°" />
 
             <TextView
-                android:id="@+id/weather_localtime"
+                android:id="@+id/weatherLocaltime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="2024-04-26 16:49" />
 
             <TextView
-                android:id="@+id/weather_vis"
+                android:id="@+id/weatherVis"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

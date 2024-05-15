@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/to_search_button"
+        android:id="@+id/toSearchButton"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginTop="@dimen/indent"
@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to_search_button" />
+        app:layout_constraintTop_toBottomOf="@+id/toSearchButton" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -47,14 +47,14 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/items_button"
+            android:id="@+id/itemsButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/items" />
 
         <ImageButton
-            android:id="@+id/basket_button"
+            android:id="@+id/basketButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -62,14 +62,14 @@
             app:tint="@color/gray" />
 
         <ImageButton
-            android:id="@+id/favourites_button"
+            android:id="@+id/favouritesButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/favourites" />
 
         <ImageButton
-            android:id="@+id/account_button"
+            android:id="@+id/accountButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"

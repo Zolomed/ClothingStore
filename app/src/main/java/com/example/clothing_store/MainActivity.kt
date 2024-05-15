@@ -27,11 +27,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        authButton = findViewById(R.id.auth_button)
-        linkToReg = findViewById(R.id.link_to_reg)
+        authButton = findViewById(R.id.authButton)
+        linkToReg = findViewById(R.id.linkToReg)
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val otherLayout = inflater.inflate(R.layout.activity_account, null)
-        val themeSwitcher : SwitchMaterial = otherLayout.findViewById(R.id.theme_switcher)
+        val themeSwitcher : SwitchMaterial = otherLayout.findViewById(R.id.themeSwitcher)
 
         themeSwitcher.isChecked = (applicationContext as App).darkTheme
         (applicationContext as App).switchTheme(themeSwitcher.isChecked)

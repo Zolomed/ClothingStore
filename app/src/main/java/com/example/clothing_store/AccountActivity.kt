@@ -27,11 +27,11 @@ class AccountActivity : AppCompatActivity() {
             insets
         }
 
-        logoutButton = findViewById(R.id.logout_button)
-        itemsButton = findViewById(R.id.items_button)
-        basketButton = findViewById(R.id.basket_button)
-        favouritesButton = findViewById(R.id.favourites_button)
-        themeSwitcher = findViewById(R.id.theme_switcher)
+        logoutButton = findViewById(R.id.logoutButton)
+        itemsButton = findViewById(R.id.itemsButton)
+        basketButton = findViewById(R.id.basketButton)
+        favouritesButton = findViewById(R.id.favouritesButton)
+        themeSwitcher = findViewById(R.id.themeSwitcher)
 
         logoutButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -41,7 +41,7 @@ class AccountActivity : AppCompatActivity() {
 
         themeSwitcher.isChecked = (applicationContext as App).darkTheme
 
-        themeSwitcher.setOnCheckedChangeListener {switcher,  checked->
+        themeSwitcher.setOnCheckedChangeListener { _, checked->
             (applicationContext as App).switchTheme(checked)
         }
 

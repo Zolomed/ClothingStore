@@ -13,12 +13,12 @@ import com.example.clothing_store.retrofit.Weather
 class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
     class WeatherViewHolder(view: View):RecyclerView.ViewHolder(view){
-        val weatherName: TextView = view.findViewById(R.id.weather_name)
-        val weatherImage: ImageView = view.findViewById(R.id.weather_image)
-        val weatherOb: TextView = view.findViewById(R.id.weather_ob)
-        val weatherTemp: TextView = view.findViewById(R.id.weather_temp)
-        val weatherLocaltime: TextView = view.findViewById(R.id.weather_localtime)
-        val weatherVis: TextView = view.findViewById(R.id.weather_vis)
+        val weatherName: TextView = view.findViewById(R.id.weatherName)
+        val weatherImage: ImageView = view.findViewById(R.id.weatherImage)
+        val weatherOb: TextView = view.findViewById(R.id.weatherOb)
+        val weatherTemp: TextView = view.findViewById(R.id.weatherTemp)
+        val weatherLocaltime: TextView = view.findViewById(R.id.weatherLocaltime)
+        val weatherVis: TextView = view.findViewById(R.id.weatherVis)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeatherViewHolder {

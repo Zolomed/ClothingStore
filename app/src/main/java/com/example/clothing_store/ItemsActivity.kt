@@ -25,10 +25,10 @@ class ItemsActivity : AppCompatActivity() {
             insets
         }
 
-        toSearchButton = findViewById(R.id.to_search_button)
-        basketButton = findViewById(R.id.basket_button)
-        favouritesButton = findViewById(R.id.favourites_button)
-        accountButton = findViewById(R.id.account_button)
+        toSearchButton = findViewById(R.id.toSearchButton)
+        basketButton = findViewById(R.id.basketButton)
+        favouritesButton = findViewById(R.id.favouritesButton)
+        accountButton = findViewById(R.id.accountButton)
 
         toSearchButton.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)

@@ -24,6 +24,10 @@ import com.example.clothing_store.retrofit.WeatherApiRepo
 
 
 class SearchActivity : AppCompatActivity() {
+    companion object {
+        private const val SEARCH_TEXT_KEY = "search_text_key"
+        private const val SEARCH_DEBOUNCE_DELAY = 2000L
+    }
 
     private lateinit var search: EditText
     private lateinit var clearButton: ImageButton
@@ -33,7 +37,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var weatherButton: Button
     private lateinit var errorText: TextView
     private val searchRunnable = Runnable { getAPIData() }
-    val handler = Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +50,12 @@ class SearchActivity : AppCompatActivity() {
         }
 
         search = findViewById(R.id.search)
-        clearButton = findViewById(R.id.clear_button)
-        backButton = findViewById(R.id.back_button)
-        progressBar = findViewById(R.id.progress_bar)
-        rvWeather = findViewById(R.id.rv_weather)
-        weatherButton = findViewById(R.id.weather_button)
-        errorText = findViewById(R.id.error_text)
+        clearButton = findViewById(R.id.clearButton)
+        backButton = findViewById(R.id.backButton)
+        progressBar = findViewById(R.id.progressBar)
+        rvWeather = findViewById(R.id.weatherRecyclerView)
+        weatherButton = findViewById(R.id.weatherButton)
+        errorText = findViewById(R.id.errorText)
 
         if (savedInstanceState != null) {
             val searchText = savedInstanceState.getString(SEARCH_TEXT_KEY)
@@ -88,18 +92,11 @@ class SearchActivity : AppCompatActivity() {
 
         weatherButton.setOnClickListener {
             getAPIData()
-            search.text.clear()
         }
 
         errorText.setOnClickListener {
             getAPIData()
-            search.text.clear()
         }
-    }
-
-    companion object {
-        private const val SEARCH_TEXT_KEY = "search_text_key"
-        private const val SEARCH_DEBOUNCE_DELAY = 2000L
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -124,8 +121,8 @@ class SearchActivity : AppCompatActivity() {
 
         weatherApiRepo.getDataFromApi(text, rvWeather, errorText, progressBar){weather ->
             val layoutManager = LinearLayoutManager(this)
-            val adapter = WeatherAdapter(listOf(weather))
-            rvWeather.adapter = adapter
+            val weatherAdapter = WeatherAdapter(listOf(weather))
+            rvWeather.adapter = weatherAdapter
             rvWeather.setLayoutManager(layoutManager)
         }
     }
