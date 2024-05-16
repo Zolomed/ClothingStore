@@ -1,13 +1,16 @@
-package com.example.diary
+package com.example.clothing_store
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,8 +27,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        authButton = findViewById(R.id.auth_button)
-        linkToReg = findViewById(R.id.link_to_reg)
+        authButton = findViewById(R.id.authButton)
+        linkToReg = findViewById(R.id.linkToReg)
+        val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val otherLayout = inflater.inflate(R.layout.activity_account, null)
+        val themeSwitcher : SwitchMaterial = otherLayout.findViewById(R.id.themeSwitcher)
+
+        themeSwitcher.isChecked = (applicationContext as App).darkTheme
+        (applicationContext as App).switchTheme(themeSwitcher.isChecked)
 
         authButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

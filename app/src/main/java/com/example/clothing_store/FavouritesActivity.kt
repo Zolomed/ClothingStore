@@ -1,4 +1,4 @@
-package com.example.diary
+package com.example.clothing_store
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,39 +8,39 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class BasketActivity : AppCompatActivity() {
+class FavouritesActivity : AppCompatActivity() {
 
     private lateinit var itemsButton: ImageButton
-    private lateinit var favouritesButton: ImageButton
+    private lateinit var basketButton: ImageButton
     private lateinit var accountButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_basket)
+        setContentView(R.layout.activity_favourites)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        itemsButton = findViewById(R.id.items_button)
-        favouritesButton = findViewById(R.id.favourites_button)
-        accountButton = findViewById(R.id.account_button)
+        itemsButton = findViewById(R.id.itemsButton)
+        basketButton = findViewById(R.id.basketButton)
+        accountButton = findViewById(R.id.accountButton)
 
-        itemsButton.setOnClickListener{
+        itemsButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        favouritesButton.setOnClickListener{
-            val intent = Intent(this, FavouritesActivity::class.java)
+        basketButton.setOnClickListener {
+            val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
 
-        accountButton.setOnClickListener{
+        accountButton.setOnClickListener {
             val intent = Intent(this, AccountActivity::class.java)
             startActivity(intent)
             finishAffinity()

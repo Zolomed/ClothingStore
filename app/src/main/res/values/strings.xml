@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Diary</string>
+    <string name="app_name">Сlothing store</string>
     <string name="user_phone">Введите номер телефона</string>
     <string name="user_pass">Введите пароль</string>
     <string name="register">Зарегистрироваться</string>
@@ -15,7 +15,7 @@
     <string name="account">Аккаунт</string>
     <string name="product_name_primer">Платье</string>
     <string name="price_primer">Цена: 100р.</string>
-    <string name="search_hint">Введите товар или бренд</string>
+    <string name="search_hint">Введите город</string>
     <string name="clear">Очистить</string>
     <string name="go_back">Вернуться назад</string>
 </resources>

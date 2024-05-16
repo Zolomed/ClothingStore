@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/logout_button"
+        android:id="@+id/logoutButton"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
@@ -75,6 +75,14 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:text="@string/edit_profile" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/themeSwitcher"
+                style="@style/Base.Theme.Diary"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Переключение темы" />
         </LinearLayout>
     </LinearLayout>
 
@@ -88,28 +96,28 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/items_button"
+            android:id="@+id/itemsButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/items" />
 
         <ImageButton
-            android:id="@+id/basket_button"
+            android:id="@+id/basketButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/basket" />
 
         <ImageButton
-            android:id="@+id/favourites_button"
+            android:id="@+id/favouritesButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/favourites" />
 
         <ImageButton
-            android:id="@+id/account_button"
+            android:id="@+id/accountButton"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_weight="1"

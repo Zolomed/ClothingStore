@@ -1,4 +1,4 @@
-package com.example.diary.retrofit
+package com.example.clothing_store.retrofit
 
 data class Location(
     val country: String,

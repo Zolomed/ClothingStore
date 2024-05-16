@@ -1,4 +1,4 @@
-package com.example.diary
+package com.example.clothing_store
 
 import android.content.Intent
 import android.os.Bundle
@@ -24,8 +24,8 @@ class RegActivity : AppCompatActivity() {
             insets
         }
 
-        regButton = findViewById(R.id.reg_button)
-        linkToLog = findViewById(R.id.link_to_log)
+        regButton = findViewById(R.id.regButton)
+        linkToLog = findViewById(R.id.linkToLog)
 
         regButton.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)

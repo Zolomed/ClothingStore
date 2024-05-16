@@ -8,7 +8,7 @@
     tools:context=".SearchActivity">
 
     <ImageButton
-        android:id="@+id/back_button"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
@@ -25,29 +25,40 @@
         android:layout_marginStart="@dimen/indent"
         android:layout_marginTop="80dp"
         android:ems="10"
-        android:text="Москва"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
+        android:textSize="18sp"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toStartOf="@+id/clear_button"
+        app:layout_constraintEnd_toStartOf="@+id/clearButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/clear_button"
+        android:id="@+id/clearButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="79dp"
         android:layout_marginEnd="10dp"
         android:scaleType="centerCrop"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cross"
         tools:ignore="TouchTargetSizeCheck" />
 
+    <Button
+        android:id="@+id/weatherButton"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Какая сейчас погода?"
+        app:layout_constraintBottom_toTopOf="@+id/errorText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_weather"
+        android:id="@+id/weatherRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="425dp"
         android:layout_marginHorizontal="@dimen/indent"
@@ -57,27 +68,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search" />
 
-    <Button
-        android:id="@+id/weather_button"
-        style="@style/Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Какая сейчас погода?"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_weather" />
-
-    <TextView
-        android:id="@+id/error_text"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchHistoryRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
-        android:layout_marginTop="25dp"
-        android:text="Ошибка"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weather_button" />
+        app:layout_constraintTop_toBottomOf="@+id/search" />
+
+    <Button
+        android:id="@+id/clearHistoryButton"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Очистить историю"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchHistoryRecyclerView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginBottom="20dp"
+        android:text="Ошибка"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
