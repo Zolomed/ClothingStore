@@ -35,10 +35,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var clearButton: ImageButton
     private lateinit var backButton: ImageButton
     private lateinit var progressBar: ProgressBar
-    private lateinit var rvWeather: RecyclerView
+    private lateinit var weatherRecyclerView: RecyclerView
     private lateinit var weatherButton: Button
     private lateinit var errorText: TextView
-    private lateinit var rvSearchHistory: RecyclerView
+    private lateinit var searchHistoryRecyclerView: RecyclerView
     private lateinit var clearHistoryButton: Button
 
     private val searchRunnable = Runnable { getAPIData() }
@@ -60,12 +60,12 @@ class SearchActivity : AppCompatActivity() {
         clearButton = findViewById(R.id.clearButton)
         backButton = findViewById(R.id.backButton)
         progressBar = findViewById(R.id.progressBar)
-        rvWeather = findViewById(R.id.weatherRecyclerView)
+        weatherRecyclerView = findViewById(R.id.weatherRecyclerView)
         weatherButton = findViewById(R.id.weatherButton)
         errorText = findViewById(R.id.errorText)
-        rvSearchHistory = findViewById(R.id.searchHistoryRecyclerView)
+        searchHistoryRecyclerView = findViewById(R.id.searchHistoryRecyclerView)
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
-        rvSearchHistory.layoutManager = LinearLayoutManager(this)
+        searchHistoryRecyclerView.layoutManager = LinearLayoutManager(this)
 
         sharedPreferencesSearch = getSharedPreferences("SearchHistory", MODE_PRIVATE)
 
@@ -85,14 +85,19 @@ class SearchActivity : AppCompatActivity() {
 
         clearHistoryButton.setOnClickListener {
             clearSearchHistory()
+            val searchHistory = getSearchHistory().toList()
+            val adapter = SearchHistoryAdapter(searchHistory)
+            searchHistoryRecyclerView.adapter = adapter
+            searchHistoryRecyclerView.visibility = View.GONE
+            clearHistoryButton.visibility = View.GONE
         }
 
         search.setOnClickListener {
             search.requestFocus()
             val searchHistory = getSearchHistory().toList()
             val adapter = SearchHistoryAdapter(searchHistory)
-            rvSearchHistory.adapter = adapter
-            rvSearchHistory.visibility = View.VISIBLE
+            searchHistoryRecyclerView.adapter = adapter
+            searchHistoryRecyclerView.visibility = View.VISIBLE
             clearHistoryButton.visibility = View.VISIBLE
             showKeyboard()
         }
@@ -113,7 +118,6 @@ class SearchActivity : AppCompatActivity() {
 
         weatherButton.setOnClickListener {
             getAPIData()
-            saveSearchQuery(search.text.toString())
         }
 
         errorText.setOnClickListener {
@@ -140,12 +144,15 @@ class SearchActivity : AppCompatActivity() {
     private fun getAPIData() {
         val text = search.text.toString()
         val weatherApiRepo = WeatherApiRepo()
+        saveSearchQuery(search.text.toString())
+        searchHistoryRecyclerView.visibility = View.GONE
+        clearHistoryButton.visibility = View.GONE
 
-        weatherApiRepo.getDataFromApi(text, rvWeather, errorText, progressBar){weather ->
+        weatherApiRepo.getDataFromApi(text, weatherRecyclerView, errorText, progressBar){weather ->
             val layoutManager = LinearLayoutManager(this)
             val weatherAdapter = WeatherAdapter(listOf(weather))
-            rvWeather.adapter = weatherAdapter
-            rvWeather.setLayoutManager(layoutManager)
+            weatherRecyclerView.adapter = weatherAdapter
+            weatherRecyclerView.setLayoutManager(layoutManager)
         }
     }
 

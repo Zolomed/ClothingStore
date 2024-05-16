@@ -27,6 +27,7 @@
         android:ems="10"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
+        android:textSize="18sp"
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toStartOf="@+id/clearButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +71,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchHistoryRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/indent"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
