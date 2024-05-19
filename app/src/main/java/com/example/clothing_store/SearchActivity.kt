@@ -97,8 +97,10 @@ class SearchActivity : AppCompatActivity() {
             val searchHistory = getSearchHistory().toList()
             val adapter = SearchHistoryAdapter(searchHistory)
             searchHistoryRecyclerView.adapter = adapter
-            searchHistoryRecyclerView.visibility = View.VISIBLE
-            clearHistoryButton.visibility = View.VISIBLE
+            if (searchHistory.isNotEmpty()) {
+                searchHistoryRecyclerView.visibility = View.VISIBLE
+                clearHistoryButton.visibility = View.VISIBLE
+            }
             showKeyboard()
         }
 
@@ -143,16 +145,23 @@ class SearchActivity : AppCompatActivity() {
 
     private fun getAPIData() {
         val text = search.text.toString()
-        val weatherApiRepo = WeatherApiRepo()
-        saveSearchQuery(search.text.toString())
-        searchHistoryRecyclerView.visibility = View.GONE
-        clearHistoryButton.visibility = View.GONE
+        if (text != "") {
+            val weatherApiRepo = WeatherApiRepo()
+            saveSearchQuery(search.text.toString())
+            searchHistoryRecyclerView.visibility = View.GONE
+            clearHistoryButton.visibility = View.GONE
 
-        weatherApiRepo.getDataFromApi(text, weatherRecyclerView, errorText, progressBar){weather ->
-            val layoutManager = LinearLayoutManager(this)
-            val weatherAdapter = WeatherAdapter(listOf(weather))
-            weatherRecyclerView.adapter = weatherAdapter
-            weatherRecyclerView.setLayoutManager(layoutManager)
+            weatherApiRepo.getDataFromApi(
+                text,
+                weatherRecyclerView,
+                errorText,
+                progressBar
+            ) { weather ->
+                val layoutManager = LinearLayoutManager(this)
+                val weatherAdapter = WeatherAdapter(listOf(weather))
+                weatherRecyclerView.adapter = weatherAdapter
+                weatherRecyclerView.setLayoutManager(layoutManager)
+            }
         }
     }
 
