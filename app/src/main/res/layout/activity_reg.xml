@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".RegActivity">
+    tools:context=".activity.RegActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,6 +27,7 @@
         android:layout_marginTop="120dp"
         android:layout_marginHorizontal="@dimen/indent"
         android:textColorHint="@color/gray"
+        android:text="+78005553535"
         android:hint="@string/user_phone" />
 
     <EditText
@@ -39,6 +40,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginHorizontal="@dimen/indent"
         android:textColorHint="@color/gray"
+        android:text="+78005553535"
         android:hint="@string/user_pass" />
 
     <Button
@@ -58,5 +60,15 @@
         android:layout_marginTop="@dimen/indent"
         android:textSize="15sp"
         android:text="@string/voity" />
+
+    <TextView
+        android:id="@+id/errorTextReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/red"
+        android:text="Ошибка"
+        android:visibility="gone" />
 
 </LinearLayout>

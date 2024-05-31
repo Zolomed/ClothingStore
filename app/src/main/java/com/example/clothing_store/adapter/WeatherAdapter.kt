@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clothing_store.R
-import com.example.clothing_store.retrofit.Weather
+import com.example.clothing_store.model.weather.Weather
 
 class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
