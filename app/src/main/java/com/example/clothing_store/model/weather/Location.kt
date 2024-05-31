@@ -1,4 +1,4 @@
-package com.example.clothing_store.retrofit
+package com.example.clothing_store.model.weather
 
 data class Location(
     val country: String,

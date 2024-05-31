@@ -1,4 +1,4 @@
-package com.example.clothing_store
+package com.example.clothing_store.activity
 
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -20,9 +21,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.clothing_store.R
 import com.example.clothing_store.adapter.SearchHistoryAdapter
 import com.example.clothing_store.adapter.WeatherAdapter
-import com.example.clothing_store.retrofit.WeatherApiRepo
+import com.example.clothing_store.model.weather.Weather
+import com.example.clothing_store.retrofit.Retrofit
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class SearchActivity : AppCompatActivity() {
@@ -41,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchHistoryRecyclerView: RecyclerView
     private lateinit var clearHistoryButton: Button
 
-    private val searchRunnable = Runnable { getAPIData() }
+    private val searchRunnable = Runnable { getWeather() }
     private val handler = Handler(Looper.getMainLooper())
 
     private lateinit var sharedPreferencesSearch: SharedPreferences
@@ -63,8 +69,9 @@ class SearchActivity : AppCompatActivity() {
         weatherRecyclerView = findViewById(R.id.weatherRecyclerView)
         weatherButton = findViewById(R.id.weatherButton)
         errorText = findViewById(R.id.errorText)
-        searchHistoryRecyclerView = findViewById(R.id.searchHistoryRecyclerView)
         clearHistoryButton = findViewById(R.id.clearHistoryButton)
+
+        searchHistoryRecyclerView = findViewById(R.id.searchHistoryRecyclerView)
         searchHistoryRecyclerView.layoutManager = LinearLayoutManager(this)
 
         sharedPreferencesSearch = getSharedPreferences("SearchHistory", MODE_PRIVATE)
@@ -111,19 +118,21 @@ class SearchActivity : AppCompatActivity() {
         search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
+
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 searchDebounce()
             }
+
             override fun afterTextChanged(p0: Editable?) {
             }
         })
 
         weatherButton.setOnClickListener {
-            getAPIData()
+            getWeather()
         }
 
         errorText.setOnClickListener {
-            getAPIData()
+            getWeather()
         }
     }
 
@@ -143,25 +152,54 @@ class SearchActivity : AppCompatActivity() {
         imm.showSoftInput(search, InputMethodManager.SHOW_IMPLICIT)
     }
 
-    private fun getAPIData() {
-        val text = search.text.toString()
-        if (text != "") {
-            val weatherApiRepo = WeatherApiRepo()
+    private fun getWeather() {
+        val city = search.text.toString()
+        if (city != "") {
             saveSearchQuery(search.text.toString())
             searchHistoryRecyclerView.visibility = View.GONE
             clearHistoryButton.visibility = View.GONE
+            weatherRecyclerView.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
 
-            weatherApiRepo.getDataFromApi(
-                text,
-                weatherRecyclerView,
-                errorText,
-                progressBar
-            ) { weather ->
-                val layoutManager = LinearLayoutManager(this)
-                val weatherAdapter = WeatherAdapter(listOf(weather))
-                weatherRecyclerView.adapter = weatherAdapter
-                weatherRecyclerView.setLayoutManager(layoutManager)
-            }
+            val data: MutableMap<String, String> = HashMap()
+            data["key"] = "8c34f5691fcb4e6e9e1180730241704"
+            data["aqi"] = "no"
+            data["q"] = city
+
+            Retrofit.weatherService.getWeather(data).enqueue(object : Callback<Weather> {
+                override fun onResponse(call: Call<Weather>, response: Response<Weather>) {
+                    progressBar.visibility = View.GONE
+                    if (response.isSuccessful) {
+                        if (response.code() == 200) {
+                            val weather = response.body()
+                            val layoutManager = LinearLayoutManager(this@SearchActivity)
+                            val weatherAdapter = WeatherAdapter(listOf(weather))
+                            weatherRecyclerView.adapter = weatherAdapter
+                            weatherRecyclerView.setLayoutManager(layoutManager)
+
+                            errorText.visibility = View.GONE
+                            weatherRecyclerView.visibility = View.VISIBLE
+                        }
+                    } else {
+                        Log.e("ApiError", "Request failed: " + response.code())
+                        if (response.code() == 400) {
+                            errorText.visibility = View.VISIBLE
+                            errorText.text = "Ничего не найдено, для повтора нажмите."
+                        } else if (response.code() in 0..999) {
+                            errorText.visibility = View.VISIBLE
+                            errorText.text = "Произошла ошибка, для повтора нажмите."
+                        } else {
+                            errorText.visibility = View.VISIBLE
+                            errorText.text =
+                                "Отсутствует подключение подключение к интернету, для повтора нажмите."
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Weather>, t: Throwable) {
+                    Log.e("ApiError", "Request failed: ${t.message}")
+                }
+            })
         }
     }
 

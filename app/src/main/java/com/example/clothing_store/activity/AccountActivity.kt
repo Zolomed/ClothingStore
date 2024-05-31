@@ -1,4 +1,4 @@
-package com.example.clothing_store
+package com.example.clothing_store.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.clothing_store.App
+import com.example.clothing_store.R
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class AccountActivity : AppCompatActivity() {

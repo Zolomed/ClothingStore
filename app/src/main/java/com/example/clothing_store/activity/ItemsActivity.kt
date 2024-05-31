@@ -1,4 +1,4 @@
-package com.example.clothing_store
+package com.example.clothing_store.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,29 +7,37 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.clothing_store.R
 
-class BasketActivity : AppCompatActivity() {
+class ItemsActivity : AppCompatActivity() {
 
-    private lateinit var itemsButton: ImageButton
+    private lateinit var toSearchButton: ImageButton
+    private lateinit var basketButton: ImageButton
     private lateinit var favouritesButton: ImageButton
     private lateinit var accountButton: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_basket)
+        setContentView(R.layout.activity_items)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        itemsButton = findViewById(R.id.itemsButton)
+        toSearchButton = findViewById(R.id.toSearchButton)
+        basketButton = findViewById(R.id.basketButton)
         favouritesButton = findViewById(R.id.favouritesButton)
         accountButton = findViewById(R.id.accountButton)
 
-        itemsButton.setOnClickListener {
-            val intent = Intent(this, ItemsActivity::class.java)
+        toSearchButton.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+        }
+
+        basketButton.setOnClickListener {
+            val intent = Intent(this, BasketActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }
@@ -45,13 +53,5 @@ class BasketActivity : AppCompatActivity() {
             startActivity(intent)
             finishAffinity()
         }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, ItemsActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
