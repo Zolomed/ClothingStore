@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val otherLayout = inflater.inflate(R.layout.activity_account, null)
-        val themeSwitcher : SwitchMaterial = otherLayout.findViewById(R.id.themeSwitcher)
+        val themeSwitcher: SwitchMaterial = otherLayout.findViewById(R.id.themeSwitcher)
 
         themeSwitcher.isChecked = (applicationContext as App).darkTheme
         (applicationContext as App).switchTheme(themeSwitcher.isChecked)
@@ -63,19 +63,23 @@ class MainActivity : AppCompatActivity() {
 
             errorText.visibility = View.GONE
 
-            Retrofit.myService.getLog(user).enqueue(object : Callback<LoginResp>{
+            Retrofit.myService.getLog(user).enqueue(object : Callback<LoginResp> {
                 override fun onResponse(
                     call: Call<LoginResp>,
                     response: Response<LoginResp>
                 ) {
                     if (response.code() == 200) {
                         val token = response.body()?.token
-                        Toast.makeText(this@MainActivity, "Ваш токен: $token", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Ваш токен: $token", Toast.LENGTH_SHORT)
+                            .show()
                         val intent = Intent(this@MainActivity, ItemsActivity::class.java)
                         startActivity(intent)
                         finishAffinity()
                     } else {
-                        Log.e("WeatherApp", "Ошибка ответа: ${response.code()} ${response.errorBody()}")
+                        Log.e(
+                            "WeatherApp",
+                            "Ошибка ответа: ${response.code()} ${response.errorBody()}"
+                        )
 
                         errorText.text = response.errorBody()?.string()
                         errorText.visibility = View.VISIBLE

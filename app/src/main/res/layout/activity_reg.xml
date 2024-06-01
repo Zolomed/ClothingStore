@@ -5,43 +5,43 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".activity.RegActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/indent"
         android:layout_marginHorizontal="@dimen/indent"
-        android:textSize="30sp"
-        android:text="@string/go_reg" />
+        android:layout_marginTop="@dimen/indent"
+        android:text="@string/go_reg"
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/userPhoneReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginTop="120dp"
         android:ems="10"
+        android:hint="@string/user_phone"
         android:inputType="phone"
         android:minHeight="48dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginHorizontal="@dimen/indent"
-        android:textColorHint="@color/gray"
         android:text="+78005553535"
-        android:hint="@string/user_phone" />
+        android:textColorHint="@color/gray" />
 
     <EditText
         android:id="@+id/userPassReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/indent"
+        android:layout_marginTop="40dp"
         android:ems="10"
+        android:hint="@string/user_pass"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginHorizontal="@dimen/indent"
-        android:textColorHint="@color/gray"
         android:text="+78005553535"
-        android:hint="@string/user_pass" />
+        android:textColorHint="@color/gray" />
 
     <Button
         android:id="@+id/regButton"
@@ -58,8 +58,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/indent"
-        android:textSize="15sp"
-        android:text="@string/voity" />
+        android:text="@string/voity"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/errorTextReg"
@@ -67,8 +67,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:textColor="@color/red"
         android:text="Ошибка"
+        android:textColor="@color/red"
         android:visibility="gone" />
 
 </LinearLayout>

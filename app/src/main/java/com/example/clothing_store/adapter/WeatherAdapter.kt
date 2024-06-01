@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.clothing_store.R
 import com.example.clothing_store.model.weather.Weather
 
-class WeatherAdapter(private val data: List<Weather?>?):RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
+class WeatherAdapter(private val data: List<Weather?>?) :
+    RecyclerView.Adapter<WeatherAdapter.WeatherViewHolder>() {
 
-    class WeatherViewHolder(view: View):RecyclerView.ViewHolder(view){
+    class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val weatherName: TextView = view.findViewById(R.id.weatherName)
         val weatherImage: ImageView = view.findViewById(R.id.weatherImage)
         val weatherOb: TextView = view.findViewById(R.id.weatherOb)

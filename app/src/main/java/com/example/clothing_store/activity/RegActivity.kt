@@ -54,7 +54,7 @@ class RegActivity : AppCompatActivity() {
 
             errorTextReg.visibility = View.GONE
 
-            Retrofit.myService.getReg(user).enqueue(object : Callback<RegisterResp>{
+            Retrofit.myService.getReg(user).enqueue(object : Callback<RegisterResp> {
                 override fun onResponse(
                     call: Call<RegisterResp>,
                     response: Response<RegisterResp>
@@ -62,13 +62,17 @@ class RegActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         val token = response.body()?.token
 
-                        Toast.makeText(this@RegActivity, "Ваш токен: $token", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegActivity, "Ваш токен: $token", Toast.LENGTH_SHORT)
+                            .show()
 
                         val intent = Intent(this@RegActivity, ItemsActivity::class.java)
                         startActivity(intent)
                         finishAffinity()
                     } else {
-                        Log.e("WeatherApp", "Ошибка ответа: ${response.code()} ${response.errorBody()}")
+                        Log.e(
+                            "WeatherApp",
+                            "Ошибка ответа: ${response.code()} ${response.errorBody()}"
+                        )
 
                         errorTextReg.text = response.errorBody()?.string()
                         errorTextReg.visibility = View.VISIBLE
