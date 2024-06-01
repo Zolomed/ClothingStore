@@ -7,14 +7,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clothing_store.R
 
-class SearchHistoryAdapter(private val searchHistory: List<String>) : RecyclerView.Adapter<SearchHistoryAdapter.ViewHolder>() {
+class SearchHistoryAdapter(private val searchHistory: List<String>) :
+    RecyclerView.Adapter<SearchHistoryAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_search_history, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_search_history, parent, false)
         return ViewHolder(view)
     }
 

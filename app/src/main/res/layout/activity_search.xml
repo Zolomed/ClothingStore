@@ -27,8 +27,8 @@
         android:ems="10"
         android:hint="@string/search_hint"
         android:minHeight="48dp"
-        android:textSize="18sp"
         android:textColorHint="@color/gray"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/clearButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
