@@ -1,20 +1,17 @@
 package com.example.clothing_store.retrofit
 
-import com.example.clothing_store.model.login.LoginReq
-import com.example.clothing_store.model.login.LoginResp
-import com.example.clothing_store.model.register.RegisterReq
-import com.example.clothing_store.model.register.RegisterResp
+import com.example.clothing_store.model.authorization.UserReq
+import com.example.clothing_store.model.authorization.UserResp
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MyApiService {
 
     @POST("register")
-    fun getReg(@Body request: RegisterReq): Call<RegisterResp>
+    fun getReg(@Body request: UserReq): Call<UserResp>
 
     @POST("login")
-    fun getLog(@Body request: LoginReq): Call<LoginResp>
+    fun getLog(@Body request: UserReq): Call<UserResp>
 
 }

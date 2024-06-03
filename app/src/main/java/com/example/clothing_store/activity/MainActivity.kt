@@ -16,8 +16,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.clothing_store.App
 import com.example.clothing_store.R
-import com.example.clothing_store.model.login.LoginReq
-import com.example.clothing_store.model.login.LoginResp
+import com.example.clothing_store.model.authorization.UserReq
+import com.example.clothing_store.model.authorization.UserResp
 import com.example.clothing_store.retrofit.Retrofit
 import com.google.android.material.switchmaterial.SwitchMaterial
 import retrofit2.Call
@@ -59,14 +59,14 @@ class MainActivity : AppCompatActivity() {
             val phone = userPhone.text.toString().trim()
             val password = userPass.text.toString().trim()
 
-            val user = LoginReq(phone, password)
+            val user = UserReq(phone, password)
 
             errorText.visibility = View.GONE
 
-            Retrofit.myService.getLog(user).enqueue(object : Callback<LoginResp> {
+            Retrofit.myService.getLog(user).enqueue(object : Callback<UserResp> {
                 override fun onResponse(
-                    call: Call<LoginResp>,
-                    response: Response<LoginResp>
+                    call: Call<UserResp>,
+                    response: Response<UserResp>
                 ) {
                     if (response.code() == 200) {
                         val token = response.body()?.token
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<LoginResp>, t: Throwable) {
+                override fun onFailure(call: Call<UserResp>, t: Throwable) {
                     Log.e("ApiError", "Request failed: ${t.message}")
                 }
 
