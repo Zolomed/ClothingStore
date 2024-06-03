@@ -13,10 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.clothing_store.R
-import com.example.clothing_store.model.login.LoginReq
-import com.example.clothing_store.model.login.LoginResp
-import com.example.clothing_store.model.register.RegisterReq
-import com.example.clothing_store.model.register.RegisterResp
+import com.example.clothing_store.model.authorization.UserReq
+import com.example.clothing_store.model.authorization.UserResp
 import com.example.clothing_store.retrofit.Retrofit
 import retrofit2.Call
 import retrofit2.Callback
@@ -50,14 +48,14 @@ class RegActivity : AppCompatActivity() {
             val phone = userPhoneReg.text.toString().trim()
             val password = userPassReg.text.toString().trim()
 
-            val user = RegisterReq(phone, password)
+            val user = UserReq(phone, password)
 
             errorTextReg.visibility = View.GONE
 
-            Retrofit.myService.getReg(user).enqueue(object : Callback<RegisterResp> {
+            Retrofit.myService.getReg(user).enqueue(object : Callback<UserResp> {
                 override fun onResponse(
-                    call: Call<RegisterResp>,
-                    response: Response<RegisterResp>
+                    call: Call<UserResp>,
+                    response: Response<UserResp>
                 ) {
                     if (response.code() == 200) {
                         val token = response.body()?.token
@@ -79,7 +77,7 @@ class RegActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<RegisterResp>, t: Throwable) {
+                override fun onFailure(call: Call<UserResp>, t: Throwable) {
                     Log.e("ApiError", "Request failed: ${t.message}")
                 }
 
