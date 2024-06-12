@@ -43,7 +43,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@drawable/avatar" />
+            android:src="@drawable/ava"
+            app:tint="@color/no_color" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -7,16 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.clothing_store.R
 import com.example.clothing_store.model.Item
 
-class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-
-    private val itemList = listOf(
-        Item(R.drawable.image1, "Рубашка", 2000),
-        Item(R.drawable.image2, "Штаны", 7000),
-        Item(R.drawable.image3, "Футболка", 5000),
-    )
+class ItemAdapter(private val data: List<Item?>) :
+    RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val itemImage: ImageView = view.findViewById(R.id.itemImage)
@@ -30,15 +26,21 @@ class ItemAdapter : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return data.size
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val data = itemList[position]
-        holder.itemName.text = data.name
-        holder.itemPrice.text = "Цена: ${data.price}р."
-        holder.itemImage.setImageResource(data.imageId)
+        val items = data[position]
+        holder.itemName.text = items!!.name
+        holder.itemPrice.text = "Цена: ${items.price}р."
+
+        items.image.let {
+            holder.itemImage.load(it) {
+//                placeholder(R.drawable.placeholder_image) // Можно установить изображение-плейсхолдер(во время загрузки)
+//                error(R.drawable.error_image) // Можно установить изображение для ошибки загрузки
+            }
+        }
     }
 
 }

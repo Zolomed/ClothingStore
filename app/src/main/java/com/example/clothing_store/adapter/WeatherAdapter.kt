@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.clothing_store.R
 import com.example.clothing_store.model.weather.Weather
 
@@ -29,12 +30,16 @@ class WeatherAdapter(private val data: List<Weather?>?) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: WeatherViewHolder, position: Int) {
-        val item = data?.get(position)
-        holder.weatherName.text = item?.location?.name
-        holder.weatherLocaltime.text = "Время: ${item?.location?.localtime}"
-        holder.weatherOb.text = "Описание: ${item?.current?.condition?.text}"
-        holder.weatherTemp.text = "Темперетара: ${item?.current?.temp_c.toString()}С°"
-        holder.weatherVis.text = "Скорость ветра: ${item?.current?.vis_km.toString()}km/h"
+        val weather = data?.get(position)
+        holder.weatherName.text = weather?.location?.name
+        holder.weatherLocaltime.text = "Время: ${weather?.location?.localtime}"
+        holder.weatherOb.text = "Описание: ${weather?.current?.condition?.text}"
+        holder.weatherTemp.text = "Темперетара: ${weather?.current?.temp_c.toString()}С°"
+        holder.weatherVis.text = "Скорость ветра: ${weather?.current?.vis_km.toString()}km/h"
+
+        weather?.current?.condition?.icon.let {
+            holder.weatherImage.load(it)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -46,6 +46,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    //Retrofit для API
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    //Загрузка изображения
+    implementation(libs.coil)
 }
